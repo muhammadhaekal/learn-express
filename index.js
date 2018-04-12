@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 //   req.requestTime = new Date();
 //   next();
 // };
+var port = process.env.PORT || 8080;
 
 let todoList = [
   { todo: "learn NodeJs", done: false },
@@ -62,4 +63,4 @@ app.delete("/todo/:id", (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Example app listening on port 3000!"));
+app.listen(port, () => console.log(`Example app listening on port ${port}! `));
