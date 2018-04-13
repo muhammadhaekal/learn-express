@@ -32,16 +32,17 @@ const getOne = () => {
 };
 
 //Create new todo
-const createNew = () => {
+const createNew = (todo, done = false) => {
   return axios
     .post("http://localhost:3000/todo", {
-      todo: "New Todo",
-      done: false
+      todo: todo,
+      done: done
     })
     .then(function(rawResponse) {
       console.log("-------------------------------------------");
       console.log("Create new todo");
       console.log(rawResponse.data);
+      getAll();
     })
     .catch(function(error) {
       console.log(error);
