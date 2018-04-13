@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 // var requestTime = function(req, res, next) {
 //   req.requestTime = new Date();
 //   next();
 // };
-var port = process.env.PORT || 3001;
+var port = process.env.PORT || 3000;
 
 let todoList = [
   { todo: "Learn NodeJs", done: false },
@@ -20,6 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// allow corss origin
+app.use(cors());
+
 app.get("/todo/search", (req, res) => {
   let searchKey = req.query.todo;
   let result = todoList.filter(todo =>
@@ -29,13 +33,13 @@ app.get("/todo/search", (req, res) => {
 });
 
 app.get("/todo", (req, res) => {
-  res.send({ data: todoList });
+  res.send(todoList);
 });
 
-app.get("/todo/:id", (req, res) => {
+app.get("/todo/:variable", (req, res) => {
   let length = todoList.length;
-  let index = req.params.id;
-  console.log(index);
+  let index = req.params.variable;
+
   if (index > length - 1) {
     res.send("not found");
   } else {

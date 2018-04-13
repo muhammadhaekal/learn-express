@@ -1,13 +1,16 @@
-const axios = require("axios");
-
+// const axios = require("axios");
+const container = document.getElementById("container");
 //get ALL
 const getAll = () => {
   return axios
     .get("http://localhost:3000/todo")
     .then(rawResponse => {
-      console.log("-------------------------------------------");
-      console.log("get All");
-      console.log(rawResponse.data);
+      let bufferString = "";
+      let datas = rawResponse.data;
+      datas.map(data => {
+        bufferString += `<div class="list-item">${data.todo}</div>`;
+      });
+      container.innerHTML = bufferString;
     })
     .catch(function(error) {
       console.log(error);
@@ -45,8 +48,4 @@ const createNew = () => {
     });
 };
 
-getAll();
-getOne();
-createNew();
-createNew();
 getAll();
